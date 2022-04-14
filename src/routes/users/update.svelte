@@ -56,6 +56,14 @@
                 axios.put(variables.SERVER_URL + '/users/ById/' + selected._id, user)
                 .then(response => {
                     alert("Update Sucessful!")
+                    selected = '';
+                    username = '';
+                    password = '';
+                    repassword = '';
+                  
+                    f_name = '';
+                    l_name = '';
+                    email = '';
                     getUsers();
                 }).catch(error => {
                     console.log(error);
@@ -75,7 +83,114 @@
     };
 </script>
 
-<h2 class="text-lg font-semibold">Select User</h2>
+<div>
+  <h2 class="text-2xl m-4">Update User</h2>
+  <form class="w-full max-w-lg mx-4">
+      <div class="flex flex-wrap -mx-3 mb-6">
+          <div class="w-full px-3">
+              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-username">
+                Selected User
+              </label>
+              <select bind:value={selected} class="{!selected ? "border-red-500" : "border-gray-200"} block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-username" placeholder="Choose group to update">
+                  <option value='' selected disabled hidden>Choose User</option>
+                  {#each users_data as user}
+                      <option value={user}>
+                          {user.username}
+                      </option>
+                  {/each}
+              </select>
+              {#if !selected}
+                  <p class="text-red-500 text-xs italic ">Please select user to Delete</p>
+                  <p>Selected User {selected ? selected.username : '[waiting...]'}</p>
+              {/if}
+          </div>
+      </div>
+      {#if selected}
+      <div class="w-full max-w-lg mx-4">
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                First Name
+              </label>
+              <input bind:value={f_name} class="{f_name == '' ? "border-red-500" : "border-gray-200"} appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-first-name" type="text" placeholder="Jane">
+              {#if f_name == '' || l_name ==''}
+              <p class="text-red-500 text-xs italic ">Please fill out this field.</p>
+              {/if}
+            </div>
+            <div class="w-full md:w-1/2 px-3">
+              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                Last Name
+              </label>
+              <input bind:value={l_name} class="{l_name == '' ? "border-red-500" : "border-gray-200"} appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Doe">
+            </div>
+          </div>
+          <div class="flex flex-wrap -mx-3 mb-6">
+              <div class="w-full px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-username">
+                  Username
+                </label>
+                <input disabled bind:value={username} class="{username == '' ? "border-red-500" : "border-gray-200"} appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-username" type="text" placeholder="jane.doe">
+                <p class="text-gray-600 text-xs italic">Make it as unique as yourself!</p>
+                {#if username == ''}
+                <p class="text-red-500 text-xs italic ">Please fill out this field.</p>
+                {/if}
+              </div>
+          </div>
+          <div class="flex flex-wrap -mx-3 mb-6">
+              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password-1">
+                  Password
+                </label>
+                <input bind:value={password} type="password" class="{password == '' ? "border-red-500" : "border-gray-200"} appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password-2" placeholder="******">
+                {#if password == '' || repassword == ''}
+                <p class="text-red-500 text-xs italic ">Please fill out this field.</p>
+                {/if}
+              </div>
+              <div class="w-full md:w-1/2 px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password-2">
+                  Retype Password
+                </label>
+                <input bind:value={repassword} type="password" class="{password != repassword ? "border-red-500" : "border-gray-200"} appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password-2" placeholder="******">
+                {#if password != repassword}
+                <p class="text-red-500 text-xs italic ">Passwords don't match!</p>
+                {/if}
+              </div>
+          </div>
+          <div class="flex flex-wrap -mx-3 mb-6">
+              <div class="w-full px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-email">
+                  E Mail
+                </label>
+                <input bind:value={email} class="{email == '' ? "border-red-500" : "border-gray-200"} appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="email" placeholder="jane.doe@example.com">
+                <p class="text-gray-600 text-xs italic">You are safe. We don't spam.</p>
+                {#if email == ''}
+                <p class="text-red-500 text-xs italic ">Please fill out this field.</p>
+                {/if}
+              </div>
+          </div>
+          <!-- <div class="content-center -mx-3 mb-6">
+              <div class="px-3">
+                  <button on:click={handleSubmit} class="block shadow tracking-wide bg-orange-500 hover:bg-orange-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4" type="button">
+                      Sign Up
+                  </button>
+                  {#if status_message != ''}
+                  <p class="text-red-500 text-s italic ">{status_message}</p>
+                  {/if}
+              </div>
+          </div> -->
+        </div>
+      <div class="content-center -mx-3 mb-6">
+          <div class="px-3">
+              <button on:click={handleSubmit} class="block shadow tracking-wide bg-red-500 hover:bg-red-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4" type="button">
+                  Update User
+              </button>
+          </div>
+      </div>
+      {/if}
+  </form>
+</div>
+
+<!-- <h2 class="text-lg font-semibold">Select User</h2>
 
 <form on:submit|preventDefault={handleSubmit}>
     <div class="b-2 p-2">
@@ -158,7 +273,7 @@
         {/if}
       </div>
   </div>
-  <!-- <div class="content-center -mx-3 mb-6">
+   <div class="content-center -mx-3 mb-6">
       <div class="px-3">
           <button on:click={handleSubmit} class="block shadow tracking-wide bg-orange-500 hover:bg-orange-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4" type="button">
               Sign Up
@@ -167,6 +282,6 @@
           <p class="text-red-500 text-s italic ">{status_message}</p>
           {/if}
       </div>
-  </div> -->
+  </div>
 </div>
-{/if}
+{/if} -->

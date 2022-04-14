@@ -28,6 +28,7 @@
             .then(response => {
                 alert("Delete Sucessful!")
                 getGroups();
+                selected = '';
             }).catch(error => {
                 console.log(error);
                 alert(error)

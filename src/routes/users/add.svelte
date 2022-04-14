@@ -44,6 +44,13 @@
         .then(response => {
           console.log(response)
           alert('User Created!')
+          username = '';
+          password = '';
+          repassword = '';
+        
+          f_name = '';
+          l_name = '';
+          email = '';
         }).catch(error => {
             console.log(error);
             alert(error)
