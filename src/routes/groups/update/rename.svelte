@@ -1,7 +1,7 @@
 <script lang="ts">
     import axios from "axios";
     import { variables } from '$lib/env';
-    import type {Group} from '../../models/Group'
+    import type {Group} from '../../../models/Group'
 
     let group_data = [];
 
@@ -63,7 +63,7 @@
 </script>
 
 <div>
-    <h2 class="text-2xl m-4">Update Group</h2>
+    <h2 class="text-2xl m-4">Rename Group</h2>
     <form class="w-full max-w-lg mx-4">
         <div class="flex flex-wrap -mx-3 mb-6">
             <div class="w-full px-3">

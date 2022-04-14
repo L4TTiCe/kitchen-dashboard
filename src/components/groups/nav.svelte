@@ -7,20 +7,28 @@
 
     let active = '';
     function refresh() {
-        switch ($page.url.pathname) {
-            case "/groups":
-            case "/groups/add":
-                active = 'add';
-                break;
-            case "/groups/delete":
-                active = 'delete';
-                break;
-            case "/groups/update":
-                active = 'update';
-                break;
-            default:
-                active = 'add';
+        const url = $page.url.pathname;
+        if (url.includes('add') && !url.includes('membership')) {
+            active = 'add'
+        } else if (url.includes('delete')) {
+            active = 'delete'
+        } else {
+            active = 'update'
         }
+        // switch ($page.url.pathname) {
+        //     case "/groups":
+        //     case "/groups/add":
+        //         active = 'add';
+        //         break;
+        //     case "/groups/delete":
+        //         active = 'delete';
+        //         break;
+        //     case "/groups/update":
+        //         active = 'update';
+        //         break;
+        //     default:
+        //         active = 'add';
+        // }
     }
     refresh();
 
