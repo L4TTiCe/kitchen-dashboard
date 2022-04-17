@@ -187,7 +187,7 @@
 
 <div>
     <h2 class="text-2xl m-4">Delete Nutrition Data</h2>
-    <form class="w-full max-w-lg mx-4">
+    <form class="w-full max-w-xl mx-4">
         <div class="flex flex-wrap -mx-3 mb-6">
             <div class="w-full px-3">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-username">
