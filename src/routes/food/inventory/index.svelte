@@ -1,7 +1,7 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
 
-    goto("/food/foodDB/add")
+    goto("/food/inventory/add")
 </script>
 
 DEBUG

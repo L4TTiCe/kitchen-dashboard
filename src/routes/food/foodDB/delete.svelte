@@ -14,7 +14,7 @@
 </script>
 
 <script lang="ts">
-    import NutritionLabel from '../../components/nutrition/nutrition_label.svelte';
+    import NutritionLabel from '../../../components/nutrition/nutrition_label.svelte';
     export let food_data;
 
     let selected;

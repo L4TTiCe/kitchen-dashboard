@@ -8,10 +8,12 @@
     let active = '';
     function refresh() {
         const url = $page.url.pathname;
-        if (url.includes('foodDB')) {
-            active = 'foodDB'
+        if (url.includes('add')) {
+            active = 'add'
+        } else if (url.includes('delete')) {
+            active = 'delete'
         } else {
-            active = 'inventory'
+            active = 'update'
         }
     }
     refresh();
@@ -23,10 +25,13 @@
 <!-- <p>Current URL: {$page.url.pathname}</p> -->
 <ul class="flex">
     <li class="flex-1 mr-2">
-        <a class="{active == 'foodDB' ? active_classes : inactive_classes}" href="/food/foodDB">FoodDB</a>
+        <a class="{active == 'add' ? active_classes : inactive_classes}" href="/food/foodDB/add">Add Food Item to FoodDB</a>
       </li>
     <li class="flex-1 mr-2">
-      <a class="{active == 'inventory' ? active_classes : inactive_classes}" href="/food/inventory">Inventory</a>
+      <a class="{active == 'update' ? active_classes : inactive_classes}" href="/food/foodDB/update">Update Food Item on FoodDB</a>
+    </li>
+    <li class="flex-1 mr-2">
+        <a class="{active == 'delete' ? active_classes : inactive_classes}" href="/food/foodDB/delete">Remove Food Item from FoodDB</a>
     </li>
 </ul>
 
