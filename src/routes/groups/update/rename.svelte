@@ -1,7 +1,7 @@
 <script lang="ts">
     import axios from "axios";
     import { variables } from '$lib/env';
-    import type {Group} from '../../../models/Group'
+    import type { Group } from '$lib/models/Group'
 
     let group_data = [];
 

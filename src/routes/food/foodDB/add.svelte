@@ -12,12 +12,12 @@
 
 <script lang="ts">
     import { variables } from '$lib/env'
-    import {placeholder} from '../../../components/placeholders/NutritionData'
-    import NutritionLabel from '../../../components/nutrition/nutrition_label.svelte';
+    import {placeholder} from '$lib/components/placeholders/NutritionData'
+    import NutritionLabel from '$lib/components/nutrition/nutrition_label.svelte';
     import axios from "axios";
-    import type { Nutrition } from 'src/models/Nutrition';
-    import type { Food } from 'src/models/Food';
-    import FoodForm from '../../../components/food/food_form.svelte';
+    import type { Nutrition } from '$lib/models/Nutrition';
+    import type { Food } from '$lib/models/Food';
+    import FoodForm from '$lib/components/food/food_form.svelte';
 
     let name: string = null;
     let upc:string = null;

@@ -1,6 +1,6 @@
 <script lang="ts">
     import { variables } from '$lib/env'
-    import type {Group} from '../../models/Group'
+    import type {Group} from '$lib/models/Group'
     import axios from "axios";
   
     let groupName: string = '';

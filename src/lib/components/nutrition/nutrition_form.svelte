@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type {Nutrition} from "../../models/Nutrition";
+    import type {Nutrition} from "$lib/models/Nutrition";
 
     export let upc: string;
     export let serving_size: number;

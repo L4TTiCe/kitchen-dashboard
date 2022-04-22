@@ -8,12 +8,10 @@
     let active = '';
     function refresh() {
         const url = $page.url.pathname;
-        if (url.includes('add')) {
-            active = 'add'
-        } else if (url.includes('delete')) {
-            active = 'delete'
+        if (url.includes('locations')) {
+            active = 'location'
         } else {
-            active = 'update'
+            active = 'kitchen'
         }
     }
     refresh();
@@ -25,13 +23,10 @@
 <!-- <p>Current URL: {$page.url.pathname}</p> -->
 <ul class="flex my-3">
     <li class="flex-1 mr-2">
-        <a class="{active == 'add' ? active_classes : inactive_classes}" href="/nutrition/add">Add Nutrition</a>
+        <a class="{active == 'kitchen' ? active_classes : inactive_classes}" href="/kitchens/kitchen">Kitchen</a>
       </li>
     <li class="flex-1 mr-2">
-      <a class="{active == 'update' ? active_classes : inactive_classes}" href="/nutrition/update">Update Nutrition</a>
-    </li>
-    <li class="flex-1 mr-2">
-        <a class="{active == 'delete' ? active_classes : inactive_classes}" href="/nutrition/delete">Remove Nutrition</a>
+      <a class="{active == 'location' ? active_classes : inactive_classes}" href="/kitchens/locations">Locations</a>
     </li>
 </ul>
 

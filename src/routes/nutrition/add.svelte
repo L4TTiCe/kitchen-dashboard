@@ -1,9 +1,9 @@
 <script lang="ts">
     import { variables } from '$lib/env'
-    import type {Nutrition} from '../../models/Nutrition'
+    import type { Nutrition } from '$lib/models/Nutrition'
     import axios from "axios";
-    import NutritionLabel from '../../components/nutrition/nutrition_label.svelte';
-    import NutritionForm from '../../components/nutrition/nutrition_form.svelte';
+    import NutritionLabel from '$lib/components/nutrition/nutrition_label.svelte';
+    import NutritionForm from '$lib/components/nutrition/nutrition_form.svelte';
 
     let upc: string = '';
     let serving_size: number = null ;

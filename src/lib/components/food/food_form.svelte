@@ -1,6 +1,6 @@
 <script lang="ts">
-    import type {Nutrition} from "../../models/Nutrition";
-    import {placeholder} from "../placeholders/NutritionData";
+    import type { Nutrition } from "$lib/models/Nutrition";
+    import { placeholder } from "$lib/components/placeholders/NutritionData";
 
     export let upc: string;
     export let name: string;

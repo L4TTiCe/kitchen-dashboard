@@ -1,7 +1,7 @@
 <script lang="ts">
     import axios from "axios";
     import { variables } from '$lib/env';
-    import type {User} from '../../models/User'
+    import type { User } from '$lib/models/User'
 
     let users_data = [];
 

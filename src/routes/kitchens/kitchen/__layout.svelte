@@ -25,13 +25,16 @@
 <!-- <p>Current URL: {$page.url.pathname}</p> -->
 <ul class="flex my-3">
     <li class="flex-1 mr-2">
-        <a class="{active == 'add' ? active_classes : inactive_classes}" href="/nutrition/add">Add Nutrition</a>
+        <a class="{active == 'add' ? active_classes : inactive_classes}" href="/kitchens/kitchen/add">Add Kitchen</a>
       </li>
     <li class="flex-1 mr-2">
-      <a class="{active == 'update' ? active_classes : inactive_classes}" href="/nutrition/update">Update Nutrition</a>
+      <a class="{active == 'update' ? active_classes : inactive_classes}" href="/kitchens/kitchen/update">Update Kitchen</a>
     </li>
     <li class="flex-1 mr-2">
-        <a class="{active == 'delete' ? active_classes : inactive_classes}" href="/nutrition/delete">Remove Nutrition</a>
+        <a class="{active == 'delete' ? active_classes : inactive_classes}" href="/kitchens/kitchen/delete">Delete Kitchen</a>
+    </li>
+    <li class="flex-1 mr-2">
+        <a class="{active == 'attach' ? active_classes : inactive_classes}" href="/groups/update/attach_kitchen">Attach/Detach with Group</a>
     </li>
 </ul>
 

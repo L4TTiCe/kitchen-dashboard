@@ -4,6 +4,9 @@
   const active_classes = "py-4 px-2 text-blue-500 font-semibold";
   const inactive_classes = "py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300";
 
+  const classes_small = "cursor-pointer text-blue-500 block px-3 py-2 hover:text-blue-500 rounded-md text-base font-medium transition duration-300";
+  const classes_small_active = "cursor-pointer bg-blue-600 text-white block px-3 py-2 hover:bg-blue-800 rounded-md text-base font-medium transition duration-300";
+
   let active = '';
   function refresh() {
     const current_url = $page.url.pathname;
@@ -20,6 +23,8 @@
     }
     else if (current_url.includes('nutrition')) {
       active = 'nutrition';
+    } else if (current_url.includes('kitchens')) {
+      active = 'kitchens';
     } else {
       active = '/';
     }
@@ -57,5 +62,15 @@
           </button>
         </div>
       </div>
+    </div>
+    <div class="md:visible">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 md:hidden">
+        <a href="/" class="{active == '/' ? classes_small_active : classes_small}">Home </a>
+        <a href="/users" class="{active == 'users' ? classes_small_active : classes_small}">Users</a>
+        <a href="/groups" class="{active == 'groups' ? classes_small_active : classes_small}">Groups</a>
+        <a href="/food" class="{active == 'food' ? classes_small_active : classes_small}">Food</a>
+        <a href="/nutrition" class="{active == 'nutrition' ? classes_small_active : classes_small}">Nutrition</a>
+        <a href="/kitchens" class="{active == 'kitchens' ? classes_small_active : classes_small}">Kitchens</a>
+        </div>
     </div>
   </nav>

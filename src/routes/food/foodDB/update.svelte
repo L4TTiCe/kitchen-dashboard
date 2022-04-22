@@ -14,10 +14,10 @@
 </script>
 
 <script lang="ts">
-    import NutritionLabel from '../../../components/nutrition/nutrition_label.svelte';
-    import type { Nutrition } from 'src/models/Nutrition';
-    import type { Food } from 'src/models/Food';
-    import FoodForm from '../../../components/food/food_form.svelte';
+    import NutritionLabel from '$lib/components/nutrition/nutrition_label.svelte';
+    import type { Nutrition } from '$lib/models/Nutrition';
+    import type { Food } from '$lib/models/Food';
+    import FoodForm from '$lib/components/food/food_form.svelte';
 
     export let food_data;
 

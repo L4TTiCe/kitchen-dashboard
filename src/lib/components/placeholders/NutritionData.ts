@@ -1,4 +1,4 @@
-import type {Nutrition} from "../../models/Nutrition";
+import type {Nutrition} from "$lib/models/Nutrition";
 
 export let placeholder: Nutrition = {
     upc: "70501635720",

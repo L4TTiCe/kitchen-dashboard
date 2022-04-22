@@ -12,6 +12,10 @@
             active = 'add'
         } else if (url.includes('remove_membership')) {
             active = 'remove'
+        } else if (url.includes('attach')) {
+            active = 'attach'
+        } else if (url.includes('detach')) {
+            active = 'detach'
         } else {
             active = 'rename'
         }
@@ -23,7 +27,7 @@
 </script>
 
 <!-- <p>Current URL: {$page.url.pathname}</p> -->
-<ul class="flex">
+<ul class="flex my-3">
     <li class="flex-1 mr-2">
         <a class="{active == 'rename' ? active_classes : inactive_classes}" href="/groups/update/rename">Rename Group</a>
       </li>
@@ -32,6 +36,12 @@
     </li>
     <li class="flex-1 mr-2">
         <a class="{active == 'remove' ? active_classes : inactive_classes}" href="/groups/update/remove_membership">Remove Member</a>
+    </li>
+    <li class="flex-1 mr-2">
+        <a class="{active == 'attach' ? active_classes : inactive_classes}" href="/groups/update/attach_kitchen">Attach Kitchen</a>
+    </li>
+    <li class="flex-1 mr-2">
+        <a class="{active == 'detach' ? active_classes : inactive_classes}" href="/groups/update/detach_kitchen">Detach Kitchen</a>
     </li>
 </ul>
 

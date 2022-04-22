@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
     import { kitchens } from "../stores/kitchenStore";
 
     let kitchens_data = [];
@@ -51,4 +51,4 @@
                 </ol>
         {/each}
     </ul>
-{/if}
+{/if} -->

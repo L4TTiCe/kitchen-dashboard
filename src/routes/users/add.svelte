@@ -1,6 +1,6 @@
 <script lang="ts">
     import { variables } from '$lib/env'
-    import type {User} from '../../models/User'
+    import type { User } from '$lib/models/User'
     import axios from "axios";
   
     let username: string = '';

@@ -1,7 +1,7 @@
 <script lang="ts">
     import axios from "axios";
     import { variables } from '$lib/env';
-    import NutritionLabel from '../../components/nutrition/nutrition_label.svelte';
+    import NutritionLabel from '$lib/components/nutrition/nutrition_label.svelte';
 
     let nutrition_data = [];
 

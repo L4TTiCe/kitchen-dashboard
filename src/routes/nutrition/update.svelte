@@ -1,9 +1,9 @@
 <script lang="ts">
     import axios from "axios";
     import { variables } from '$lib/env';
-    import type {Nutrition} from "../../models/Nutrition"
-    import NutritionLabel from '../../components/nutrition/nutrition_label.svelte';
-    import NutritionForm from '../../components/nutrition/nutrition_form.svelte';
+    import type { Nutrition } from "$lib/models/Nutrition"
+    import NutritionLabel from '$lib/components/nutrition/nutrition_label.svelte';
+    import NutritionForm from '$lib/components/nutrition/nutrition_form.svelte';
 
     let nutrition_data = [];
 
@@ -186,7 +186,7 @@
 </script>
 
 <div>
-    <h2 class="text-2xl m-4">Delete Nutrition Data</h2>
+    <h2 class="text-2xl m-4">Update Nutrition Data</h2>
     <form class="w-full max-w-xl mx-4">
         <div class="flex flex-wrap -mx-3 mb-6">
             <div class="w-full px-3">
