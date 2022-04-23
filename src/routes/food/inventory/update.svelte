@@ -1,8 +1,6 @@
 <script lang="ts">
     import axios from "axios";
     import { variables } from '$lib/env';
-    import type { User } from '$lib/models/User'
-    import type { Food } from '$lib/models/Food'
     import type { Group } from "$lib/models/Group";
     import type { Ownership } from "$lib/models/Ownership";
     import OwnershipForm from "$lib/components/ownership/ownership_form.svelte";
@@ -16,6 +14,9 @@
     let selected_group: Group = null;
     let groupId: string = null;
 
+    let selected_ownership: Ownership = null;
+    let ownershipId: string = null;
+
     let owner_id: string;
     let food_id: string;
     let quantity: number;
@@ -25,10 +26,12 @@
     let location: Location;
 
     let status_message = '';
+    let item_status = '';
     let group_data = [];
     let users_data = [];
     let food_data = [];
     let location_data = [];
+    let ownership_data = [];
 
     function resetData() {
         owner_id = null;
@@ -40,6 +43,7 @@
         location = null;
 
         status_message = '';
+        item_status = '';
     }
 
     async function getGroups() {
@@ -59,6 +63,32 @@
     //         console.log(error);
     //     });
     // }
+
+    function getSubLocationsContent(location) {
+        let contents = [];
+        if (location.subLocations.length > 0) {
+            location.subLocations.forEach(subL => {
+                contents = contents.concat(getSubLocationsContent(subL));
+            })
+        }
+        location.contents.forEach((content) => {
+            content.location = location
+            contents.push(content)
+        })
+        return contents;
+    }
+
+    function getOwnerships(group) {
+        ownership_data = [];
+
+        if (!group.kitchen) {
+            item_status = 'This Group has no attached Kitchen yet!';
+        } else {
+            group.kitchen.locations.forEach(element => {
+                ownership_data = ownership_data.concat(getSubLocationsContent(element))
+            });
+        }
+    }
 
     function getUsers(group) {
         users_data = [];
@@ -117,18 +147,26 @@
         } if (expiry) {
             ownership["date_expiry"] = expiry;
         } if (location) {
-            ownership["located_at"] = location;
+            // @ts-ignore
+            ownership["located_at"] = location._id;
         }
 
         if (food_id && owner_id) {
             canPost = true;
+            // @ts-ignore
+            ownership["owner"] = owner_id;
+            // @ts-ignore
+            ownership["food"] = food_id;
         }
 
         if (canPost) {
-            axios.post(variables.SERVER_URL + '/users/byId/' + owner_id + '/inventory/' + food_id, ownership)
+            axios.put(variables.SERVER_URL + '/inventory/ById/' + ownershipId, ownership)
                 .then(response => {
-                    alert('Food Item Created!')
+                    alert('Food Item Updated!')
                     selected_group = null;
+                    selected_ownership = null;
+                    groupId = null;
+                    ownershipId = null;
 
                     resetData();
                     getGroups();
@@ -137,16 +175,42 @@
                     alert(error)
                 });
         } else {
-            status_message = "'Location Name' is a required field."
+            status_message = "'Owner' and 'Food' are required fields."
         }
+
+        console.log(ownership)
+        // console.log(owner_id)
+        // console.log(food_id)
     }
 
     $: if(selected_group && selected_group._id != groupId) {
+        console.log("Trigger 0")
         resetData();
+        selected_ownership = null;
+        ownershipId = null;
+
         getUsers(selected_group);
         getLocations(selected_group);
+        getOwnerships(selected_group);
 
         groupId = selected_group._id;
+    }
+
+    $: if(selected_ownership && selected_ownership._id != ownershipId) {
+        ownershipId = selected_ownership._id;
+
+        console.log(selected_ownership)
+
+        resetData();
+        owner_id = selected_ownership.owner._id;
+        food_id = selected_ownership.food._id;
+        quantity = selected_ownership.quantity;
+        quantity_unit = selected_ownership.quantity_unit;
+        procured = new Date(selected_ownership.date_procured).toISOString().slice(0, 10);
+        expiry = new Date(selected_ownership.date_expiry).toISOString().slice(0, 10);
+        // @ts-ignore
+        location = selected_ownership.location;
+
     }
 </script>
 
@@ -159,7 +223,7 @@
             <div class="w-full px-3">
                 <label 
                     class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" 
-                    for="grid-username">
+                    for="grid-group">
                   Group
                 </label>
                 <select 
@@ -177,6 +241,32 @@
         </div>
     
         {#if selected_group}
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full px-3">
+                <label 
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" 
+                    for="grid-item">
+                  Selected Item
+                </label>
+                <select 
+                    bind:value={selected_ownership} 
+                    disabled={ownership_data.length==0} 
+                    class="{!selected_ownership ? "border-red-500" : "border-gray-200"} block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                    id="grid-owner">
+                    <option value={null} selected disabled hidden>{ownership_data.length == 0 ? "No Items Available" : "Choose Item"}</option>
+                    {#each ownership_data as o_item}
+                        <option value={o_item}>
+                            {o_item.food.name} [{o_item.owner.username}] @{o_item.location.name}
+                        </option>
+                    {/each}
+                </select>
+                {#if item_status != null}
+                <p class="text-red-500 text-xs italic ">{item_status}</p>
+                {/if}
+            </div>
+        </div>
+
+        {#if selected_ownership}
         <OwnershipForm
             bind:owner_id={owner_id}
             bind:food_id={food_id}
@@ -192,8 +282,9 @@
             bind:location_data={location_data}
 
             handleSubmit={handleSubmit}
-            button_text={"Add Food to Inventory"}
+            button_text={"Update Food in Inventory"}
         />
+        {/if}
         {/if}
 
     </form>

@@ -8,7 +8,7 @@ export interface Ownership {
     quantity?: number;
     quantity_unit?: string;
     price?: number;
-    date_procured?: Date;
-    date_expiry?: Date;
+    date_procured?: Date | string;
+    date_expiry?: Date | string;
     located_at?: Location;
 }
