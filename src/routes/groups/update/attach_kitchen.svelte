@@ -113,10 +113,12 @@
                 </label>
                 
                 <select bind:value={selected_kitchen} 
+                    disabled = {availableKitchens.length == 0}
                     class="{!selected_kitchen ? "border-red-500" : "border-gray-200"} block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
-                    id="grid-kitchen" >
+                    id="grid-kitchen" 
+                    placeholder="Choose group to update">
 
-                    <option value='' selected disabled hidden>Choose Kitchen</option>
+                    <option value='' selected disabled hidden>{availableKitchens.length == 0 ? "No Kitchens Available" : "Choose Kitchen"}</option>
                     {#each availableKitchens as kitchen}
                         <option value={kitchen}>
                             {kitchen.name}
@@ -126,7 +128,7 @@
 
                 {#if !selected_kitchen}
                     <p class="text-red-500 text-xs italic ">Please select Kitchen to Attach</p>
-                    <p>Selected User {selected_kitchen ? selected_kitchen.username : '[waiting...]'}</p>
+                    <p>Selected Kitchen {selected_kitchen ? selected_kitchen.username : '[waiting...]'}</p>
                 {/if}
             </div>
         </div>

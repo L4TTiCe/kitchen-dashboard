@@ -73,8 +73,8 @@
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-username">
                   Selected User
                 </label>
-                <select bind:value={selected_user} class="{!selected_user ? "border-red-500" : "border-gray-200"} block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-username" placeholder="Choose group to update">
-                    <option value='' selected disabled hidden>Choose User</option>
+                <select bind:value={selected_user} disabled={users_data.length == 0} class="{!selected_user ? "border-red-500" : "border-gray-200"} block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-username" placeholder="Choose group to update">
+                    <option value='' selected disabled hidden>{users_data.length == 0 ? "No Members" : "Choose User"}</option>
                     {#each users_data as user}
                         <option value={user}>
                             {user.username}
