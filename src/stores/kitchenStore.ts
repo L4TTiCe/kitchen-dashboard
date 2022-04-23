@@ -1,6 +1,6 @@
-import { writable } from "svelte/store";
+import { writable } from 'svelte/store';
 import { variables } from '$lib/env';
-import axios from "axios";
+import axios from 'axios';
 
 export const kitchens = writable([]);
 export const kitchenIds = writable([]);
@@ -18,31 +18,35 @@ export const kitchenIds = writable([]);
 // }
 
 export async function getKitchenIds() {
-    axios.get(variables.SERVER_URL + '/kitchens')
-    .then(response => {
-        const data = response.data;
-        let id = [];
-        data.forEach(element => {
-            id.push(element._id);
-        });
-        kitchenIds.set(id);
-    }).catch(error => {
-        console.log(error);
-    });
+	axios
+		.get(variables.SERVER_URL + '/kitchens')
+		.then((response) => {
+			const data = response.data;
+			let id = [];
+			data.forEach((element) => {
+				id.push(element._id);
+			});
+			kitchenIds.set(id);
+		})
+		.catch((error) => {
+			console.log(error);
+		});
 }
 
 export async function getKitchens() {
-    axios.get(variables.SERVER_URL + '/kitchens')
-    .then(response => {
-        const data = response.data;
-        // let data = [];
-        // data.forEach(kitchen => {
-        //     data.push(kitchen);
-        // });
-        kitchens.set(data);
-    }).catch(error => {
-        console.log(error);
-    });
+	axios
+		.get(variables.SERVER_URL + '/kitchens')
+		.then((response) => {
+			const data = response.data;
+			// let data = [];
+			// data.forEach(kitchen => {
+			//     data.push(kitchen);
+			// });
+			kitchens.set(data);
+		})
+		.catch((error) => {
+			console.log(error);
+		});
 }
 
 getKitchenIds();

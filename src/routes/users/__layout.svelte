@@ -1,6 +1,6 @@
-<script lang='ts'>
-    import Nav from "$lib/components/users/nav.svelte";
+<script lang="ts">
+	import Nav from '$lib/components/users/nav.svelte';
 </script>
 
-<Nav/>
-<slot/>
+<Nav />
+<slot />

@@ -1,8 +1,8 @@
-import type { Ownership } from "./Ownership";
+import type { Ownership } from './Ownership';
 
 export interface Location {
-    _id?: string;
-    name?: string;
-    subLocations?: Location[];
-    contents?: Ownership[];
+	_id?: string;
+	name?: string;
+	subLocations?: Location[];
+	contents?: Ownership[];
 }

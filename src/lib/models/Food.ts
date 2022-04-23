@@ -1,9 +1,9 @@
-import type { Nutrition } from "./Nutrition";
+import type { Nutrition } from './Nutrition';
 
 export interface Food {
-    _id?: string;
-    name?: string;
-    upc?: string;
-    createdOn?: Date;
-    nutrition?: Nutrition;
+	_id?: string;
+	name?: string;
+	upc?: string;
+	createdOn?: Date;
+	nutrition?: Nutrition;
 }
