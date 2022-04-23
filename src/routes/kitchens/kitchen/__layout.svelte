@@ -12,6 +12,8 @@
             active = 'add'
         } else if (url.includes('delete')) {
             active = 'delete'
+        } else if (url.includes('view')) {
+            active = 'view'
         } else {
             active = 'update'
         }
@@ -25,8 +27,11 @@
 <!-- <p>Current URL: {$page.url.pathname}</p> -->
 <ul class="flex my-3">
     <li class="flex-1 mr-2">
+        <a class="{active == 'view' ? active_classes : inactive_classes}" href="/kitchens/kitchen/view">View Kitchen</a>
+    </li>
+    <li class="flex-1 mr-2">
         <a class="{active == 'add' ? active_classes : inactive_classes}" href="/kitchens/kitchen/add">Add Kitchen</a>
-      </li>
+    </li>
     <li class="flex-1 mr-2">
       <a class="{active == 'update' ? active_classes : inactive_classes}" href="/kitchens/kitchen/update">Update Kitchen</a>
     </li>
