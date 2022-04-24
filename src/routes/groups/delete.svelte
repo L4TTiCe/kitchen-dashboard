@@ -86,7 +86,6 @@
 			</div>
 		{/if}
 
-		<JsonTree bind:json={selected}/>
-
+		<JsonTree bind:json={selected} />
 	</form>
 </div>

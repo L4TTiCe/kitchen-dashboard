@@ -20,7 +20,6 @@
 	}
 
 	getKitchenData();
-
 </script>
 
 <div>
@@ -58,6 +57,5 @@
 		</div>
 	</form>
 
-	<JsonTree bind:json={selected}/>
-
+	<JsonTree bind:json={selected} />
 </div>

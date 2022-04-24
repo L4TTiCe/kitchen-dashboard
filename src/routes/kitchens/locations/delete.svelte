@@ -182,7 +182,6 @@
 			{/if}
 		{/if}
 
-		<JsonTree bind:json={selected_location}/>
-
+		<JsonTree bind:json={selected_location} />
 	</form>
 </div>
