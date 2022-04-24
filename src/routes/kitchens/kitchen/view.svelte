@@ -2,14 +2,11 @@
 	import axios from 'axios';
 	import { variables } from '$lib/env';
 	import type { Kitchen } from '$lib/models/Kitchen';
-	import renderjson from '$lib/renderjson';
+	import JsonTree from '$lib/components/JSONTree.svelte';
 
 	let kitchen_data = [];
 
 	let selected: Kitchen = null;
-	let kitchenId: string = '';
-
-	let JSONTree;
 
 	async function getKitchenData() {
 		axios
@@ -24,17 +21,6 @@
 
 	getKitchenData();
 
-	function removeAllChildNodes(parent) {
-		while (parent.firstChild) {
-			parent.removeChild(parent.firstChild);
-		}
-	}
-
-	$: if (selected && selected._id != kitchenId) {
-		kitchenId = selected._id;
-		removeAllChildNodes(JSONTree);
-		JSONTree.appendChild(renderjson(selected));
-	}
 </script>
 
 <div>
@@ -72,7 +58,6 @@
 		</div>
 	</form>
 
-	<!-- {#if selected} -->
-	<div bind:this={JSONTree} />
-	<!-- {/if} -->
+	<JsonTree bind:json={selected}/>
+
 </div>
