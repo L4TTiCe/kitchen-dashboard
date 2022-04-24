@@ -27,7 +27,6 @@
 	$: if ($page.url.pathname) refresh();
 </script>
 
-<!-- <p>Current URL: {$page.url.pathname}</p> -->
 <ul class="flex my-3">
 	<li class="flex-1 mr-2">
 		<a class={active == 'rename' ? active_classes : inactive_classes} href="/groups/update/rename"

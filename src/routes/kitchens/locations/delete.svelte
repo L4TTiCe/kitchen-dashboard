@@ -44,7 +44,6 @@
 				let data = response.data;
 				location_data = [];
 
-				console.log(data);
 				data.locations.forEach((element) => {
 					location_data = location_data.concat(getSubLocations(element));
 				});
@@ -72,7 +71,6 @@
 			axios
 				.delete(variables.SERVER_URL + '/locations/' + selected_location._id)
 				.then((response) => {
-					console.log(response);
 					alert('Location Deleted!');
 					selected_kitchen = null;
 					selected_location = null;

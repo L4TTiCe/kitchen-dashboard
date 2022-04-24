@@ -44,11 +44,9 @@
 				let data = response.data;
 				location_data = [];
 
-				console.log(data);
 				data.locations.forEach((element) => {
 					location_data = location_data.concat(getSubLocations(element));
 				});
-				console.log(location_data);
 			})
 			.catch((error) => {
 				console.log(error);
@@ -76,7 +74,6 @@
 			axios
 				.post(variables.SERVER_URL + '/locations/' + selected_location._id, location)
 				.then((response) => {
-					console.log(response);
 					alert('Sub-Location Added!');
 					selected_kitchen = null;
 					selected_location = null;

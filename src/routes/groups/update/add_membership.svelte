@@ -134,22 +134,3 @@
 	</form>
 </div>
 
-<!-- <h2 class="text-lg font-semibold">Select Group</h2>
-
-<form on:submit|preventDefault={handleSubmit}>
-    <div class="b-2 p-2">
-        <select class="w-60 border p-2 b-2" bind:value={selected}>
-            {#each group_data as group}
-                <option value={group}>
-                    {group.name}
-                </option>
-            {/each}
-        </select>
-
-        <button type=submit class="b-4 p-2 bg-red-500 rounded text-white">
-            Delete
-        </button>
-    </div>
-</form>
-
-<p>Selected Group {selected ? selected.name : '[waiting...]'}</p> -->

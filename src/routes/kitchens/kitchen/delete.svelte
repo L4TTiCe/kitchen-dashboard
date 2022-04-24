@@ -39,7 +39,6 @@
 			axios
 				.delete(variables.SERVER_URL + '/kitchens/' + selected._id)
 				.then((response) => {
-					console.log(response);
 					alert('Kitchen Deleted!');
 					selected = null;
 

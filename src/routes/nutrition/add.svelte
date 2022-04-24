@@ -62,7 +62,6 @@
 	}
 
 	function handleSubmit() {
-		console.log('Submit?');
 		let nutrition: Nutrition = {};
 		let canPost: boolean = false;
 
@@ -136,7 +135,6 @@
 			axios
 				.post(variables.SERVER_URL + '/nutrition', nutrition)
 				.then((response) => {
-					console.log(response);
 					alert('Nutrition Information Added!');
 					resetData();
 				})

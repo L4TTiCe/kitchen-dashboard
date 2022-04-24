@@ -30,13 +30,6 @@
 	}
 
 	function handleSubmit() {
-		// console.log(username)
-		// console.log(password)
-
-		// console.log(f_name)
-		// console.log(l_name)
-		// console.log(email)
-
 		let user: User = {
 			username: username,
 			password: password,
@@ -49,7 +42,6 @@
 			axios
 				.post(variables.SERVER_URL + '/users', user)
 				.then((response) => {
-					console.log(response);
 					alert('User Created!');
 					username = '';
 					password = '';

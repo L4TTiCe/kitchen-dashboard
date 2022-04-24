@@ -57,15 +57,6 @@
 			});
 	}
 
-	// async function getUsers() {
-	//     axios.get(variables.SERVER_URL + '/users')
-	//     .then(response => {
-	//         users_data = response.data;
-	//     }).catch(error => {
-	//         console.log(error);
-	//     });
-	// }
-
 	function getSubLocationsContent(location) {
 		let contents = [];
 		if (location.subLocations.length > 0) {
@@ -111,11 +102,9 @@
 	}
 
 	function getLocations(group) {
-		console.log(group);
 		location_data = [];
 
 		if (!group.kitchen) {
-			console.log('No Kitchen');
 			status_message = "This group doen't have a Kitchen attached yet!";
 		} else {
 			group.kitchen.locations.forEach((element) => {
@@ -187,10 +176,6 @@
 		} else {
 			status_message = "'Owner' and 'Food' are required fields.";
 		}
-
-		console.log(ownership);
-		// console.log(owner_id)
-		// console.log(food_id)
 	}
 
 	$: if (selected_group && selected_group._id != groupId) {
@@ -208,8 +193,6 @@
 
 	$: if (selected_ownership && selected_ownership._id != ownershipId) {
 		ownershipId = selected_ownership._id;
-
-		console.log(selected_ownership);
 
 		resetData();
 		owner_id = selected_ownership.owner._id;

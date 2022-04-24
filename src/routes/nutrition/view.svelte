@@ -24,21 +24,6 @@
 
 	$: if (selected && selected._id != nutritionId) {
 		nutritionId = selected._id;
-
-		// upc = null;
-		// serving_size = null;
-		// serving_unit = null;
-		// calories = null;
-		// total_fat = null;
-		// saturated_fat = null;
-		// trans_fat = null;
-		// cholesterol = null;
-		// sodium = null;
-		// total_carbohydrates = null;
-		// dietary_fiber = null;
-		// total_sugar = null;
-		// added_sugar = null;
-		// protein = null;
 	}
 </script>
 

@@ -35,8 +35,6 @@
 	function handleSubmit() {
 		alert(`Chose ${selected.name} with ID "${selected._id}"`);
 
-		console.log(variables.SERVER_URL + '/groups/ById/' + selected._id);
-
 		if (selected) {
 			let group: Group = {
 				name: groupName
@@ -61,8 +59,6 @@
 	$: if (selected && selected._id != groupId) {
 		groupName = selected.name;
 		groupId = selected._id;
-
-		console.log('attaching...');
 	}
 </script>
 

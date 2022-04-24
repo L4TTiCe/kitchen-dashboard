@@ -24,8 +24,6 @@
 	function handleSubmit() {
 		alert(`Chose ${selected.name} with ID "${selected._id}"`);
 
-		console.log(variables.SERVER_URL + '/groups/ById/' + selected._id);
-
 		if (selected) {
 			axios
 				.delete(variables.SERVER_URL + '/groups/ById/' + selected._id)
@@ -89,6 +87,6 @@
 		{/if}
 
 		<JsonTree bind:json={selected}/>
-		
+
 	</form>
 </div>

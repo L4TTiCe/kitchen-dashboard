@@ -1,11 +1,8 @@
 <script lang="ts">
 	import Footer from '$lib/components/footer.svelte';
 	import Nav from '$lib/components/nav.svelte';
-	// import { env } from '$lib/env'
 
 	const app_name = 'Kitchen Dashboard';
-
-	// console.log(`SERVER_URL:  ${env.SERVER_URL}`)
 </script>
 
 <svelte:head>

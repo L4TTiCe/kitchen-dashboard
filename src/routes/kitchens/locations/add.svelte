@@ -45,7 +45,6 @@
 			axios
 				.post(variables.SERVER_URL + '/kitchens/' + selected_kitchen._id + '/add', location)
 				.then((response) => {
-					console.log(response);
 					alert('Kitchen Updated!');
 					selected_kitchen = null;
 
