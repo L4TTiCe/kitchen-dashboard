@@ -1,7 +1,7 @@
 <script lang="ts">
 	import axios from 'axios';
 	import { variables } from '$lib/env';
-	import renderjson from 'renderjson/renderjson';
+	import renderjson from '$lib/renderjson';
 
 	let group_data = [];
 

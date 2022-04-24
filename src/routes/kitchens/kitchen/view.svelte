@@ -2,7 +2,7 @@
 	import axios from 'axios';
 	import { variables } from '$lib/env';
 	import type { Kitchen } from '$lib/models/Kitchen';
-	import renderjson from 'renderjson/renderjson';
+	import renderjson from '$lib/renderjson';
 
 	let kitchen_data = [];
 
