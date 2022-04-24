@@ -3,6 +3,7 @@
 	import { variables } from '$lib/env';
 	import type { Kitchen } from '$lib/models/Kitchen';
 	import type { Location } from '$lib/models/Location';
+	import JsonTree from '$lib/components/JSONTree.svelte';
 
 	let kitchen_data = [];
 	let location_data = [];
@@ -182,5 +183,8 @@
 				</div>
 			{/if}
 		{/if}
+
+		<JsonTree bind:json={selected_location}/>
+
 	</form>
 </div>

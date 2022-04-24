@@ -2,7 +2,7 @@
 	import axios from 'axios';
 	import { variables } from '$lib/env';
 	import type { Kitchen } from '$lib/models/Kitchen';
-	import KitchenForm from '$lib/components/kitchen/kitchen_form.svelte';
+	import JsonTree from '$lib/components/JSONTree.svelte';
 
 	let kitchen_data = [];
 
@@ -115,5 +115,8 @@
 				</div>
 			</div>
 		{/if}
+
+		<JsonTree bind:json={selected}/>
+
 	</form>
 </div>
