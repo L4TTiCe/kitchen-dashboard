@@ -1,7 +1,7 @@
 <script lang="ts">
 	import renderjson from '$lib/renderjson';
 
-	export let json;
+	export let json = null;
 
 	let JSONTree = null;
 	let id = null;
@@ -23,7 +23,6 @@
 	}
 
 	$: if (json == null && JSONTree) {
-		console.log('wiped');
 		id = null;
 		removeAllChildNodes(JSONTree);
 	}
