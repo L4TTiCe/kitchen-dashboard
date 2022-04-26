@@ -2,7 +2,7 @@
 	import axios from 'axios';
 	import { variables } from '$lib/env';
 	import type { Kitchen } from '$lib/models/Kitchen';
-	import KitchenForm from '$lib/components/kitchen/kitchen_form.svelte';
+	import JsonTree from '$lib/components/JSONTree.svelte';
 
 	let kitchen_data = [];
 
@@ -39,7 +39,6 @@
 			axios
 				.delete(variables.SERVER_URL + '/kitchens/' + selected._id)
 				.then((response) => {
-					console.log(response);
 					alert('Kitchen Deleted!');
 					selected = null;
 
@@ -76,13 +75,16 @@
 				</label>
 				<select
 					bind:value={selected}
+					disabled={kitchen_data.length == 0}
 					class="{!selected
 						? 'border-red-500'
 						: 'border-gray-200'} block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 					id="grid-username"
 					placeholder="Choose group to update"
 				>
-					<option value={null} selected>Select Kitchen</option>
+					<option value={null} selected
+						>{kitchen_data.length == 0 ? 'No Kitchens' : 'Select Kitchen'}</option
+					>
 					{#each kitchen_data as kitchen}
 						<option value={kitchen}>
 							{kitchen.name}
@@ -115,5 +117,7 @@
 				</div>
 			</div>
 		{/if}
+
+		<JsonTree bind:json={selected} />
 	</form>
 </div>

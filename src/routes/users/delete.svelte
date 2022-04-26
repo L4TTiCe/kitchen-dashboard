@@ -1,15 +1,9 @@
 <script>
 	import axios from 'axios';
-	// import { users } from "../../stores/UserStores";
 	import { variables } from '$lib/env';
+	import JsonTree from '$lib/components/JSONTree.svelte';
 
 	let users_data = [];
-	let update_count = 0;
-
-	// users.subscribe(value => {
-	//     users_data = value;
-	//     update_count++;
-	// })
 
 	let selected;
 
@@ -17,13 +11,7 @@
 		axios
 			.get(variables.SERVER_URL + '/users')
 			.then((response) => {
-				const data = response.data;
-				// let data = [];
-				// data.forEach(kitchen => {
-				//     data.push(kitchen);
-				// });
-				console.log(data);
-				users_data = data;
+				users_data = response.data;
 			})
 			.catch((error) => {
 				console.log(error);
@@ -34,8 +22,6 @@
 
 	function handleSubmit() {
 		alert(`Chose ${selected.username} with ID "${selected._id}"`);
-
-		console.log(variables.SERVER_URL + '/users/ById/' + selected._id);
 
 		if (selected) {
 			axios
@@ -66,13 +52,16 @@
 				</label>
 				<select
 					bind:value={selected}
+					disabled={users_data.length == 0}
 					class="{!selected
 						? 'border-red-500'
 						: 'border-gray-200'} block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 					id="grid-username"
 					placeholder="Choose group to update"
 				>
-					<option value="" selected disabled hidden>Choose User</option>
+					<option value="" selected disabled hidden
+						>{users_data.length == 0 ? 'No Users' : 'Choose User'}</option
+					>
 					{#each users_data as user}
 						<option value={user}>
 							{user.username}
@@ -98,25 +87,7 @@
 				</div>
 			</div>
 		{/if}
+
+		<JsonTree bind:json={selected} />
 	</form>
 </div>
-
-<!-- <h2 class="text-lg font-semibold">Select User</h2>
-
-<form on:submit|preventDefault={handleSubmit}>
-    <div class="b-2 p-2">
-        <select class="w-60 border p-2 b-2" bind:value={selected}>
-            {#each users_data as user}
-                <option value={user}>
-                    {user.username}
-                </option>
-            {/each}
-        </select>
-
-        <button type=submit class="b-4 p-2 bg-red-500 rounded text-white">
-            Delete
-        </button>
-    </div>
-</form>
-
-<p>Selected User {selected ? selected.username : '[waiting...]'}</p> -->

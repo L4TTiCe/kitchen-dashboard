@@ -9,20 +9,8 @@
 
 	let status_message = '';
 
-	// async function getNutritionData() {
-	//     axios.get(variables.SERVER_URL + '/nutrition')
-	//     .then(response => {
-	//         nutrition_data = response.data;
-	//     }).catch(error => {
-	//         console.log(error);
-	//     });
-	// }
-
-	// getNutritionData();
-
 	function resetData() {
 		name = null;
-		// using_since = null;
 		using_since_s = null;
 
 		status_message = '';
@@ -40,8 +28,6 @@
 			// @ts-ignore
 			kitchen['using_since'] = new Date(using_since_s).toISOString().slice(0, 10);
 		}
-
-		console.log(kitchen);
 
 		if (canPost) {
 			axios

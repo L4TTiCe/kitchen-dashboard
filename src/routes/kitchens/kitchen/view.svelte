@@ -2,14 +2,11 @@
 	import axios from 'axios';
 	import { variables } from '$lib/env';
 	import type { Kitchen } from '$lib/models/Kitchen';
-	import renderjson from '$lib/renderjson';
+	import JsonTree from '$lib/components/JSONTree.svelte';
 
 	let kitchen_data = [];
 
 	let selected: Kitchen = null;
-	let kitchenId: string = '';
-
-	let JSONTree;
 
 	async function getKitchenData() {
 		axios
@@ -23,18 +20,6 @@
 	}
 
 	getKitchenData();
-
-	function removeAllChildNodes(parent) {
-		while (parent.firstChild) {
-			parent.removeChild(parent.firstChild);
-		}
-	}
-
-	$: if (selected && selected._id != kitchenId) {
-		kitchenId = selected._id;
-		removeAllChildNodes(JSONTree);
-		JSONTree.appendChild(renderjson(selected));
-	}
 </script>
 
 <div>
@@ -51,13 +36,16 @@
 				</label>
 				<select
 					bind:value={selected}
+					disabled={kitchen_data.length == 0}
 					class="{!selected
 						? 'border-red-500'
 						: 'border-gray-200'} block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 					id="grid-username"
 					placeholder="Choose group to update"
 				>
-					<option value={null} selected>Select Kitchen</option>
+					<option value={null} selected
+						>{kitchen_data.length == 0 ? 'No Kitchens' : 'Select Kitchen'}</option
+					>
 					{#each kitchen_data as kitchen}
 						<option value={kitchen}>
 							{kitchen.name}
@@ -72,7 +60,5 @@
 		</div>
 	</form>
 
-	<!-- {#if selected} -->
-	<div bind:this={JSONTree} />
-	<!-- {/if} -->
+	<JsonTree bind:json={selected} />
 </div>

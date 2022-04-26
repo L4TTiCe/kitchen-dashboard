@@ -1,15 +1,11 @@
 <script lang="ts">
 	import axios from 'axios';
 	import { variables } from '$lib/env';
-	import renderjson from '$lib/renderjson';
+	import JsonTree from '$lib/components/JSONTree.svelte';
 
 	let group_data = [];
 
 	let selected;
-
-	let groupId: string = '';
-
-	let JSONTree;
 
 	async function getGroups() {
 		axios
@@ -24,18 +20,6 @@
 	}
 
 	getGroups();
-
-	function removeAllChildNodes(parent) {
-		while (parent.firstChild) {
-			parent.removeChild(parent.firstChild);
-		}
-	}
-
-	$: if (selected && selected._id != groupId) {
-		groupId = selected._id;
-		removeAllChildNodes(JSONTree);
-		JSONTree.appendChild(renderjson(selected));
-	}
 </script>
 
 <div>
@@ -51,13 +35,16 @@
 				</label>
 				<select
 					bind:value={selected}
+					disabled={group_data.length == 0}
 					class="{!selected
 						? 'border-red-500'
 						: 'border-gray-200'} block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 					id="grid-username"
 					placeholder="Choose group to update"
 				>
-					<option value="" selected disabled hidden>Choose Group</option>
+					<option value="" selected disabled hidden
+						>{group_data.length == 0 ? 'No Groups' : 'Choose Group'}</option
+					>
 					{#each group_data as group}
 						<option value={group}>
 							{group.name}
@@ -71,6 +58,6 @@
 			</div>
 		</div>
 
-		<div bind:this={JSONTree} />
+		<JsonTree bind:json={selected} />
 	</form>
 </div>

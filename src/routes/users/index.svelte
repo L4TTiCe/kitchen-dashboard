@@ -1,7 +1,10 @@
-<script lang="ts">
-	import { goto } from '$app/navigation';
-
-	goto('/users/add');
+<script context="module">
+	export async function load() {
+		return {
+			status: 302,
+			redirect: '/users/add'
+		};
+	}
 </script>
 
 DEBUG

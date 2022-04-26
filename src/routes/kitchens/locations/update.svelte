@@ -45,11 +45,9 @@
 				let data = response.data;
 				location_data = [];
 
-				console.log(data);
 				data.locations.forEach((element) => {
 					location_data = location_data.concat(getSubLocations(element));
 				});
-				console.log(location_data);
 			})
 			.catch((error) => {
 				console.log(error);
@@ -77,7 +75,6 @@
 			axios
 				.put(variables.SERVER_URL + '/locations/' + selected_location._id, location)
 				.then((response) => {
-					console.log(response);
 					alert('Location Updated!');
 					selected_kitchen = null;
 					selected_location = null;
@@ -125,13 +122,16 @@
 				</label>
 				<select
 					bind:value={selected_kitchen}
+					disabled={kitchen_data.length == 0}
 					class="{!selected_kitchen
 						? 'border-red-500'
 						: 'border-gray-200'} block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 					id="grid-username"
 					placeholder="Choose group to update"
 				>
-					<option value={null} selected>Select Kitchen</option>
+					<option value={null} selected
+						>{kitchen_data.length == 0 ? 'No Kitchens' : 'Select Kitchen'}</option
+					>
 					{#each kitchen_data as kitchen}
 						<option value={kitchen}>
 							{kitchen.name}
@@ -156,13 +156,16 @@
 					</label>
 					<select
 						bind:value={selected_location}
+						disabled={location_data.length == 0}
 						class="{!selected_location
 							? 'border-red-500'
 							: 'border-gray-200'} block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 						id="grid-username"
 						placeholder="Choose group to update"
 					>
-						<option value={null} selected>Select Location</option>
+						<option value={null} selected
+							>{location_data.length == 0 ? 'No Locations' : 'Select Location'}</option
+						>
 						{#each location_data as location}
 							<option value={location}>
 								{location.name}

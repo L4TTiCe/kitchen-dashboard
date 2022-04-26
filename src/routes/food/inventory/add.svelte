@@ -1,8 +1,6 @@
 <script lang="ts">
 	import axios from 'axios';
 	import { variables } from '$lib/env';
-	import type { User } from '$lib/models/User';
-	import type { Food } from '$lib/models/Food';
 	import type { Group } from '$lib/models/Group';
 	import type { Ownership } from '$lib/models/Ownership';
 	import OwnershipForm from '$lib/components/ownership/ownership_form.svelte';
@@ -53,15 +51,6 @@
 			});
 	}
 
-	// async function getUsers() {
-	//     axios.get(variables.SERVER_URL + '/users')
-	//     .then(response => {
-	//         users_data = response.data;
-	//     }).catch(error => {
-	//         console.log(error);
-	//     });
-	// }
-
 	function getUsers(group) {
 		users_data = [];
 		group.members.forEach((member) => {
@@ -81,11 +70,9 @@
 	}
 
 	function getLocations(group) {
-		console.log(group);
 		location_data = [];
 
 		if (!group.kitchen) {
-			console.log('No Kitchen');
 			status_message = "This group doen't have a Kitchen attached yet!";
 		} else {
 			group.kitchen.locations.forEach((element) => {
@@ -174,12 +161,15 @@
 				</label>
 				<select
 					bind:value={selected_group}
+					disabled={group_data.length == 0}
 					class="{!selected_group
 						? 'border-red-500'
 						: 'border-gray-200'} block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 					id="grid-owner"
 				>
-					<option value={null} selected disabled hidden>Choose Group</option>
+					<option value={null} selected disabled hidden
+						>{group_data.length == 0 ? 'No Groups' : 'Choose Group'}</option
+					>
 					{#each group_data as group}
 						<option value={group}>
 							{group.name}

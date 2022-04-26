@@ -35,8 +35,6 @@
 	function handleSubmit() {
 		alert(`Chose ${selected.name} with ID "${selected._id}"`);
 
-		console.log(variables.SERVER_URL + '/groups/ById/' + selected._id);
-
 		if (selected) {
 			let group: Group = {
 				name: groupName
@@ -61,8 +59,6 @@
 	$: if (selected && selected._id != groupId) {
 		groupName = selected.name;
 		groupId = selected._id;
-
-		console.log('attaching...');
 	}
 </script>
 
@@ -79,13 +75,16 @@
 				</label>
 				<select
 					bind:value={selected}
+					disabled={group_data.length == 0}
 					class="{!selected
 						? 'border-red-500'
 						: 'border-gray-200'} block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 					id="grid-username"
 					placeholder="Choose group to update"
 				>
-					<option value="" selected disabled hidden>Choose Group</option>
+					<option value="" selected disabled hidden
+						>{group_data.length == 0 ? 'No Groups' : 'Choose Group'}</option
+					>
 					{#each group_data as group}
 						<option value={group}>
 							{group.name}
