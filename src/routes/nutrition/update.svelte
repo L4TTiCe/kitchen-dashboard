@@ -212,13 +212,18 @@
 				</label>
 				<select
 					bind:value={selected}
+					disabled={nutrition_data.length == 0}
 					class="{!selected
 						? 'border-red-500'
 						: 'border-gray-200'} block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 					id="grid-username"
 					placeholder="Choose group to update"
 				>
-					<option value="" selected disabled hidden>Choose Nutrition Information</option>
+					<option value="" selected disabled hidden
+						>{nutrition_data.length == 0
+							? 'No Nutrition Information'
+							: 'Choose Nutrition Information'}</option
+					>
 					{#each nutrition_data as nutrition}
 						<option value={nutrition}>
 							{nutrition.description}

@@ -96,12 +96,15 @@
 				</label>
 				<select
 					bind:value={selected_group}
+					disabled={filledGroups.length == 0}
 					class="{!selected_group
 						? 'border-red-500'
 						: 'border-gray-200'} block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 					id="grid-group"
 				>
-					<option value="" selected disabled hidden>Choose Group</option>
+					<option value="" selected disabled hidden
+						>{filledGroups.length == 0 ? 'No Groups' : 'Choose Group'}</option
+					>
 					{#each filledGroups as group}
 						<option value={group}>
 							{group.name}

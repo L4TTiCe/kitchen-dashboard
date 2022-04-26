@@ -117,13 +117,16 @@
 				</label>
 				<select
 					bind:value={selected_kitchen}
+					disabled={kitchen_data.length == 0}
 					class="{!selected_kitchen
 						? 'border-red-500'
 						: 'border-gray-200'} block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 					id="grid-username"
 					placeholder="Choose group to update"
 				>
-					<option value={null} selected>Select Kitchen</option>
+					<option value={null} selected
+						>{kitchen_data.length == 0 ? 'No Kitchens' : 'Select Kitchen'}</option
+					>
 					{#each kitchen_data as kitchen}
 						<option value={kitchen}>
 							{kitchen.name}
@@ -148,13 +151,16 @@
 					</label>
 					<select
 						bind:value={selected_location}
+						disabled={location_data.length == 0}
 						class="{!selected_location
 							? 'border-red-500'
 							: 'border-gray-200'} block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 						id="grid-username"
 						placeholder="Choose group to update"
 					>
-						<option value={null} selected>Select Location</option>
+						<option value={null} selected
+							>{location_data.length == 0 ? 'No Locations' : 'Select Location'}</option
+						>
 						{#each location_data as location}
 							<option value={location}>
 								{location.name}

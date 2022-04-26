@@ -60,13 +60,16 @@
 				</label>
 				<select
 					bind:value={selected}
+					disabled={food_data.length == 0}
 					class="{!selected
 						? 'border-red-500'
 						: 'border-gray-200'} block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 					id="grid-username"
 					placeholder="Choose group to update"
 				>
-					<option value="" selected disabled hidden>Select Food</option>
+					<option value="" selected disabled hidden
+						>{food_data.length == 0 ? 'No Food' : 'Select Food'}</option
+					>
 					{#each food_data as food}
 						<option value={food}>
 							{food.name}
