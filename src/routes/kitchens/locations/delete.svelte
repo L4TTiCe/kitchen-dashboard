@@ -4,6 +4,7 @@
 	import type { Kitchen } from '$lib/models/Kitchen';
 	import type { Location } from '$lib/models/Location';
 	import JsonTree from '$lib/components/JSONTree.svelte';
+	import { getSubLocations } from '$lib/dao/locationsDao';
 
 	let kitchen_data = [];
 	let location_data = [];
@@ -24,17 +25,6 @@
 			.catch((error) => {
 				console.log(error);
 			});
-	}
-
-	function getSubLocations(location) {
-		let subLocations = [];
-		if (location.subLocations.length > 0) {
-			location.subLocations.forEach((subL) => {
-				subLocations = subLocations.concat(getSubLocations(subL));
-			});
-		}
-		subLocations.push(location);
-		return subLocations;
 	}
 
 	async function getLocationData() {
