@@ -4,6 +4,7 @@
 	import type { Group } from '$lib/models/Group';
 	import type { Ownership } from '$lib/models/Ownership';
 	import OwnershipForm from '$lib/components/ownership/ownership_form.svelte';
+	import { getSubLocations } from '$lib/dao/locationsDao';
 
 	function addDays(date, days) {
 		var result = new Date(date);
@@ -88,17 +89,6 @@
 		group.members.forEach((member) => {
 			users_data.push(member);
 		});
-	}
-
-	function getSubLocations(location) {
-		let subLocations = [];
-		if (location.subLocations.length > 0) {
-			location.subLocations.forEach((subL) => {
-				subLocations = subLocations.concat(getSubLocations(subL));
-			});
-		}
-		subLocations.push(location);
-		return subLocations;
 	}
 
 	function getLocations(group) {
