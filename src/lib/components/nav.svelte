@@ -1,5 +1,30 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import axios from 'axios';
+	import { variables } from '$lib/env';
+	import { onInterval } from '$lib/utils';
+
+	let isServerUp = false;
+	let checkInterval = 10000;
+
+	async function testServer() {
+		axios
+			.get(variables.SERVER_URL + '/up')
+			.then((response) => {
+				if (response.status == 200) {
+					isServerUp = true;
+				} else {
+					isServerUp = false;
+				}
+			})
+			.catch((error) => {
+				isServerUp = false;
+				console.log(error);
+			});
+	}
+
+	onInterval(testServer, checkInterval);
+	testServer();
 
 	const active_classes = 'py-4 px-2 text-blue-500 font-semibold';
 	const inactive_classes =
@@ -40,9 +65,10 @@
 			<div class="flex space-x-7">
 				<div>
 					<a href="/" class="flex items-center py-4 px-2">
-						<img src="../../restaurant.png" alt="Logo" class="h-8 w-8 mr-2" /><span
-							class="font-semibold text-gray-500 text-lg">Kitchen Dashboard</span
-						>
+						<img src="../../restaurant.png" alt="Logo" class="h-8 w-8 mr-2" />
+						<span
+							class="font-semibold text-gray-500 text-lg">Kitchen Dashboard
+						</span>
 					</a>
 				</div>
 			</div>
@@ -60,6 +86,15 @@
 					class="bg-blue-600 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-800 transition duration-300"
 					>Kitchens</a
 				>
+				<span
+					class="px-4 py-2 rounded-full text-gray-500 bg-gray-200 font-semibold text-sm flex align-center w-max cursor-pointer active:bg-gray-300 transition duration-300 ease">
+					Server
+					{#if isServerUp}
+					<img src="../../green-circle.png" alt="Logo" class="h-4 w-4 m-1" />
+					{:else}
+					<img src="../../red-circle.png" alt="Logo" class="h-4 w-4 m-1" />
+					{/if}
+				</span>
 			</div>
 			<div class="mr-10 flex md:hidden">
 				<button class="inline-flex items-center justify-center p-2 rounded-md text-dark">
@@ -90,6 +125,15 @@
 			<a href="/kitchens" class={active == 'kitchens' ? classes_small_active : classes_small}
 				>Kitchens</a
 			>
+			<span
+					class="px-4 py-2 rounded-full text-gray-500 bg-gray-200 font-semibold text-sm flex align-center w-max cursor-pointer active:bg-gray-300 transition duration-300 ease">
+					Server
+					{#if isServerUp}
+					<img src="../../green-circle.png" alt="Logo" class="h-4 w-4 m-1" />
+					{:else}
+					<img src="../../red-circle.png" alt="Logo" class="h-4 w-4 m-1" />
+					{/if}
+				</span>
 		</div>
 	</div>
 </nav>
